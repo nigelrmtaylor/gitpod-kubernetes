@@ -1,17 +1,7 @@
-FROM gitpod/workspace-base:latest
+# You can find the new timestamped tags here: https://hub.docker.com/r/gitpod/workspace-base/tags
+FROM gitpod/workspace-base:2022-05-08-14-31-53
 
-ARG KUBECTL_VERSION=v1.22.2
-
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
-    chmod +x ./kubectl && \
-    sudo mv ./kubectl /usr/local/bin/kubectl && \
-    mkdir ~/.kube
-
-RUN set -x; cd "$(mktemp -d)" && \
-    OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
-    ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" && \
-    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" && \
-    tar zxvf krew.tar.gz && \
-    KREW=./krew-"${OS}_${ARCH}" && \
-    "$KREW" install krew && \
-    echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >> /home/gitpod/.bashrc
+# Install custom tools, runtime, etc.
+# base image only got `apt` as the package manager
+# install-packages is a wrapper for `apt` that helps skip a few commands in the docker env.
+RUN sudo install-packages shellcheck tree llvm
