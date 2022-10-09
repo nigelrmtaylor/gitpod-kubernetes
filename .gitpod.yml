@@ -1,2 +1,6 @@
 image:
   file: .gitpod.Dockerfile
+
+tasks:
+  - name: Set Glados K8s context
+    command: echo $K8S_CTX | base64 -d > ~/.kube/config
