@@ -8,6 +8,7 @@ RUN cd ~ && \
     tar xf ~/doctl-1.82.0-linux-amd64.tar.gz && \
     sudo mv ~/doctl /usr/local/bin
 
+# install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
     chmod +x ./kubectl && \
     sudo mv ./kubectl /usr/local/bin/kubectl && \
