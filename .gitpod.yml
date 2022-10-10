@@ -2,5 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
+  - name: Authenticate Digitalocean API
+    command: doctl auth init -t $DO_TOKEN
   - name: Set Glados K8s context
     command: echo $K8S_CTX | base64 -d > ~/.kube/config

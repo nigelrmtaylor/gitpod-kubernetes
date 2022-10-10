@@ -1,5 +1,8 @@
 # add anthorise doctl with an access token
-doctl auth init
+doctl auth init -t $DO_TOKEN
+
+# get kubeconfig into an environment variable
+cat ~/.kube/config | base64 -w 0
 
 # set up kubeconfig for the ams3 cluster
 doctl kubernetes cluster kubeconfig save 50572910-52dd-4e97-8533-99bd0c77e9e0
